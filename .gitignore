@@ -1,3 +1,5 @@
+.idea
 /node_modules/
 /.env
 /komunalka@1.0.0
+package-lock.json
