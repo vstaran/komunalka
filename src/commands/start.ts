@@ -1,21 +1,21 @@
-import { MyContext } from './../config';
+import { AppContext } from './../config'
 
-export const start = (ctx: MyContext) => {
+export const start = async (ctx: AppContext) => {
+    ctx.session.action = null;
 
-    ctx.deleteMessage();
-    ctx.reply('Start message', {
+    await ctx.reply(ctx.locale.startMessage, {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: ctx.locale?.PassMeterReadings, callback_data: 'orders' },
-                    { text: 'Історія показань', callback_data: 'orders' }
+                    { text: ctx.locale.passReadings, callback_data: 'passReadings' },
+                    { text: ctx.locale.historyReadings, callback_data: 'historyReadings' }
                 ],
                 [
-                    { text: 'Добавити адресу', callback_data: 'orders' },
-                    { text: 'Список адрес', callback_data: 'orders' }
+                    { text: ctx.locale.addAddress, callback_data: 'addAddressStep1' },
+                    { text: ctx.locale.listAddress, callback_data: 'listAddress' }
                 ],
                 [
-                    { text: 'Головне меню', callback_data: 'feedback' },
+                    { text: ctx.locale.mainMenu, callback_data: 'mainMenu' },
                 ],
             ]
         }

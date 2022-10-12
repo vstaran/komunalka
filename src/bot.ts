@@ -1,4 +1,16 @@
 import { Telegraf } from 'telegraf';
-import { MyContext, token } from './config';
+import { AppContext, token } from './config';
+import { appSession } from './middlewares/session';
+import { appLang } from './middlewares/lang';
 
-export const bot = new Telegraf<MyContext>(token);
+const bot = new Telegraf<AppContext>(token);
+
+bot.use(appSession);
+bot.use(appLang);
+
+/**
+ * for debug
+ * bot.use(Telegraf.log());
+ */
+
+export default bot;
