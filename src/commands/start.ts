@@ -20,5 +20,4 @@ export const start = async (ctx: AppContext) => {
             ]
         }
     })
-
 }

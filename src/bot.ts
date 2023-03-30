@@ -1,17 +1,20 @@
 import { Telegraf } from 'telegraf';
 import { AppContext, token } from './config';
 import { appSession } from './middlewares/session';
-import TelegrafI18n from 'telegraf-i18n';
-import path from 'path';
-
+import i18next from 'i18next';
+import { join } from 'path';
+import i18nextBackend from 'i18next-fs-backend';
 
 const bot = new Telegraf<AppContext>(token);
 
-const i18n = new TelegrafI18n({
-    defaultLanguage: 'en',
-    allowMissing: false, // Default true
-    directory: path.resolve(__dirname, 'locales')
-})
+i18next.use(i18nextBackend).init({
+    lng: 'en', // Default language
+    fallbackLng: 'en', // Fallback language
+    backend: {
+      // Load translations from the 'locales' directory
+      loadPath: join(__dirname, 'locales', '{{lng}}.json'),
+    },
+});
 
 // Middleware to handle errors
 bot.catch((err: unknown, ctx: AppContext) => {
@@ -21,7 +24,16 @@ bot.catch((err: unknown, ctx: AppContext) => {
 });
 
 bot.use(appSession);
-bot.use(i18n.middleware());
+
+
+bot.use(async (ctx, next) => {
+    const locale = ctx.from?.language_code;
+    await i18next.changeLanguage(locale);
+    ctx.i18n = i18next;
+    return next();
+});
+
+//bot.use(i18n.middleware());
 
 /**
  * for debug

@@ -6,13 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const telegraf_1 = require("telegraf");
 const config_1 = require("./config");
 const session_1 = require("./middlewares/session");
-const telegraf_i18n_1 = __importDefault(require("telegraf-i18n"));
-const path_1 = __importDefault(require("path"));
+const i18next_1 = __importDefault(require("i18next"));
+const path_1 = require("path");
+const i18next_fs_backend_1 = __importDefault(require("i18next-fs-backend"));
 const bot = new telegraf_1.Telegraf(config_1.token);
-const i18n = new telegraf_i18n_1.default({
-    defaultLanguage: 'en',
-    allowMissing: false,
-    directory: path_1.default.resolve(__dirname, 'locales')
+i18next_1.default.use(i18next_fs_backend_1.default).init({
+    lng: 'en',
+    fallbackLng: 'en',
+    backend: {
+        // Load translations from the 'locales' directory
+        loadPath: (0, path_1.join)(__dirname, 'locales', '{{lng}}.json'),
+    },
 });
 // Middleware to handle errors
 bot.catch((err, ctx) => {
@@ -21,7 +25,13 @@ bot.catch((err, ctx) => {
     ctx.reply("An error occurred. Please try again later.");
 });
 bot.use(session_1.appSession);
-bot.use(i18n.middleware());
+bot.use(async (ctx, next) => {
+    const locale = ctx.from?.language_code;
+    await i18next_1.default.changeLanguage(locale);
+    ctx.i18n = i18next_1.default;
+    return next();
+});
+//bot.use(i18n.middleware());
 /**
  * for debug
  * bot.use(Telegraf.log());
