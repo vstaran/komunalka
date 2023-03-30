@@ -16,8 +16,6 @@
 - MongoDB
 - Jest/unitTest
 
-- GraphQL?
-
 
 ## Start program
 
