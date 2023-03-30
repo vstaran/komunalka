@@ -1,0 +1,17 @@
+{
+    "passReadings": "⏲ Submit the testimony",
+    "startMessage": "Hello \uD83D\uDC4B\n▫️ Я бот який допоможе тобі зберігати показники лічильника. І потім ти зможеш переглядати введені показники, я збережу їх для тебе.\n▫️ Якщо ти вперше тут, розпочни з додаванням адреси за якою потім будеш зберігати показники.\n▫️ Команда /help виведе всі команди, можливо ти знайдеш там для себе круті команди :)",
+    "historyReadings": "\uD83D\uDD0E History of testimony",
+    "addAddress": "➕ Add Adress",
+    "removeAddress": "\uD83D\uDDD1 Delete address",
+    "listAddress": "\uD83C\uDFE0 List Adress",
+    "mainMenu": "⛳️ Main Menu",
+    "textUptime": "Uptime:",
+    "textHelp": "Help\n<strong>/start</strong> - Початок роботи з ботом\n<strong>/uptime</strong> - Час безперебійної роботи\n<strong>/help</strong> - Допомога, данна справка",
+    "textAddressAdded": "The address has been added!",
+    "textCityFormAddress": "Enter the name of the city:",
+    "textStreetFormAddress": "Enter the name of the street:",
+    "textNotFoundAddress": "Address not found!",
+    "textListOfAddress": "List of addresses:\n",
+    "textRemoveAddressList": "Click on the address you want to delete:\n"
+}
