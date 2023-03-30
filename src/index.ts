@@ -5,6 +5,7 @@ import {db} from "./config";
 
 (async () => {
     try {
+        mongoose.set("strictQuery", true);
         await mongoose.connect(db.DB_MONGODB_URI, {
             dbName: db.DB_NAME
         }, () => {

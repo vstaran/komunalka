@@ -3,6 +3,7 @@ import { help } from './help';
 import { uptime } from './uptime';
 import { sticker } from './sticker';
 import { info } from './info';
+import { lang } from './lang';
 import {
     addAddressStep1,
     addAddressStep2,
@@ -18,7 +19,7 @@ bot.help(help);
 
 bot.command('uptime', uptime);
 bot.command('info', info);
-
+bot.command('lang', lang);
 
 // Передати показання
 /**
@@ -51,10 +52,13 @@ bot.action('removeAddressList', removeAddressList);
 bot.action(/removeAddress:(.+)/, removeAddress);
 
 
+
+
+
 bot.action('mainMenu', start);
 
 
-bot.on('sticker', sticker)
+bot.on('sticker', sticker);
 bot.on('text', async (ctx) => {
     const text = ctx.message?.text;
 
@@ -65,9 +69,9 @@ bot.on('text', async (ctx) => {
 })
 
 
-// bot.action(/.+/, (ctx) => {
-//     return ctx.answerCbQuery(`Oh, ${ctx.match[0]}! Great choice`)
-// })
+bot.action(/.+/, (ctx) => {
+    return ctx.answerCbQuery(`Oh, ${ctx.match[0]}! Great choice`)
+})
 
 // bot.on('callback_query', async  (ctx) => {
 //     console.log(ctx.from)

@@ -27,4 +27,5 @@ export interface AppContext extends Context {
     locale?: any
     session?: any
     match?: any
+    i18n?: any
 }
